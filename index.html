@@ -1,32 +1,40 @@
 <html>
-  <head>
-    <title>Angular 2 QuickStart JS</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
 
-    <!-- 1. Load libraries -->
-    <!-- IE required polyfill -->
-    <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+<head>
+  <title>Angular 2 QuickStart JS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="node_modules/zone.js/dist/zone.js"></script>
-    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+  <!-- 1. Load libraries -->
+  <!-- IE required polyfill -->
 
-    <script src="node_modules/rxjs/bundles/Rx.umd.js"></script>
-    <script src="node_modules/@angular/core/core.umd.js"></script>
-    <script src="node_modules/@angular/common/common.umd.js"></script>
-    <script src="node_modules/@angular/compiler/compiler.umd.js"></script>
-    <script src="node_modules/@angular/platform-browser/platform-browser.umd.js"></script>
-    <script src="node_modules/@angular/platform-browser-dynamic/platform-browser-dynamic.umd.js"></script>
+  <script src="node_modules/es6-shim/es6-shim.js"></script>
+  <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+  <script src="node_modules/systemjs/dist/system.src.js"></script>
+  <script src="node_modules/rxjs/bundles/Rx.js"></script>
+  <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
 
-    <!-- 2. Load our 'modules' -->
-    <script src='app/app.component.js'></script>
-    <script src='app/main.js'></script>
+  <!-- 2. Load our 'modules' -->
 
-  </head>
+  <!--<script src='app/app.js'></script>-->
+</head>
 
-  <!-- 3. Display the application -->
-  <body>
-    <my-app>Loading...</my-app>
-  </body>
+<!-- 3. Display the application -->
+
+<body>
+
+  <script>
+    System.config({
+        packages: {
+          app: {
+            format: 'register',
+            defaultExtension: 'js'
+          }
+      }})
+      System.import('app/app.js')
+            .then(null, console.error.bind(console));
+  </script>
+
+  <hello-world>Loading...</hello-world>
+</body>
 
 </html>

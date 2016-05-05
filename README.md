@@ -63,3 +63,17 @@
   </div>
 </ul>
 ```
+
+*input  使用#newlink 来绑定属性。
+ ```html
+  <div class="field">
+      <label for="link">Link:</label>
+      <input name="link" #newlink>
+  </div>
+  
+   <button (click)="addArticle(newtitle,newlink)"
+                    class="ui positive right floated button"
+                >
+            Submit link
+   </button>
+ ```

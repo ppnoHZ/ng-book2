@@ -4,28 +4,45 @@
 
 import { bootstrap } from "angular2/platform/browser";
 import { Component } from "angular2/core";
+import { ArticleComponent } from "./app-02";
 
 @Component({
-    selector: 'hello-world',
+    selector: 'reddit',
+    directives: [ArticleComponent],
     template: `
-        <ul>
-            <li *ngFor='#name of names'>
-                Hello {{name}}
-            </li>
-        </ul>
+        <form class="ui large form segment">
+            <h3 class="ui header">Add a Link</h3>
+            <div class="field">
+                <label for="title">Title:</label>
+                <input name="title" #newtitle>
+            </div>
+            
+            <div class="field">
+                <label for="link">Link:</label>
+                <input name="link" #newlink>
+            </div>
+            <button (click)="addArticle(newtitle,newlink)"
+                    class="ui positive right floated button"
+                >
+            Submit link
+            </button>
+        </form>
         
-        <div>
-            hello {{name}}
+        
+        <div class="ui grid posts">
+            <reddit-article>
+            
+            </reddit-article>
         </div>
+        
         `
 })
 
-class HelloWorld {
-    name: string;
-    names: string[];
+class RedditApp {
     constructor() {
-        this.name = 'zhoudd'
-        this.names=['Ari','Carlos','Felipe','Nate'];
+    }
+    addArticle(title: HTMLInputElement, link: HTMLInputElement): void {
+        console.log(`title :${title.value} and link : ${link.value}`)
     }
 }
-bootstrap(HelloWorld);
+bootstrap(RedditApp);

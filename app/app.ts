@@ -9,7 +9,7 @@ import { Article } from './model/article';
 
 @Component({
     selector: 'reddit',
-    directives: [ArticleComponent],
+    directives: [ArticleComponent],//引用其他组件，才能在当前组件中使用
     template: `
         <form class="ui large form segment">
             <h3 class="ui header">Add a Link</h3>
@@ -31,7 +31,7 @@ import { Article } from './model/article';
         
         
         <div class="ui grid posts">
-            <reddit-article *ngFor="#article of articles"
+            <reddit-article *ngFor="#article of sortArticle()"
                 [article]="article"
                 >
             </reddit-article>
@@ -51,6 +51,9 @@ class RedditApp {
     }
     addArticle(title: HTMLInputElement, link: HTMLInputElement): void {
         console.log(`title :${title.value} and link : ${link.value}`)
+    }
+    sortArticle(): Article[] {
+        return this.articles.sort((a: Article, b: Article) => a.votes - a.votes);
     }
 }
 bootstrap(RedditApp);

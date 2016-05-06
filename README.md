@@ -64,7 +64,7 @@
 </ul>
 ```
 
-*input  使用#newlink 来绑定属性。
+* input  使用#newlink 来绑定属性。
  ```html
   <div class="field">
       <label for="link">Link:</label>
@@ -77,4 +77,28 @@
             Submit link
    </button>
  ```
- *a 标签冒泡事件，在a的click事件中 返回false，就可以阻止a
+* a 标签冒泡事件，在a的click事件中 返回false，就可以阻止a
+* 组件引用：在组件A中要使用组件B，则需要在A组件的directives属性中添加引用,如下：
+ ```javascript
+  directives: [ArticleComponent],//引用其他组件，才能在当前组件中使用
+ ```
+* 给组件传递变量
+    * 组件中定义:
+    ```javascript
+          inputs:['article'],//定义从外面传进来的变量
+    
+    ```
+    
+    * 页面传值: [article] 里面的为组件中定义的变量，"article" 是调用组件传递实际值。
+    ```html
+      <div class="ui grid posts">
+                <reddit-article *ngFor="#article of articles"
+                    [article]="article"
+                    >
+                </reddit-article>
+      </div>
+    ```
+ 
+ 
+ 
+ *

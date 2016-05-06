@@ -9,7 +9,7 @@ import { Article } from './model/article';
 
 @Component({
     selector: 'reddit-article',
-    inputs:['article'],
+    inputs:['article'],//定义从外面传进来的变量
     host: {
         class: 'row'
     },
@@ -31,6 +31,7 @@ import { Article } from './model/article';
         <a class="ui large header" href="{{article.link}}">
             {{article.title}}
         </a>
+        <div class="meta">({{article.domain()}})</div>
         <ul class="ui big horizontal list voters">
             <li class="item">
                 <a href (click)="voteUp()">

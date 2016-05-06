@@ -77,3 +77,4 @@
             Submit link
    </button>
  ```
+ *a 标签冒泡事件，在a的click事件中 返回false，就可以阻止a

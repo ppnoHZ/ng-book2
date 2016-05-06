@@ -58,25 +58,25 @@ export class ArticleComponent {
     // title: string;
     // link: string;
     // votes: number;
-    
-    article:Article;
-    
+
+    article: Article;
+
     constructor() {
-        
-        
-        this.article=new Article('Angular 2','http://angular.io',10);
-        
+
+
+        this.article = new Article('Angular 2', 'http://angular.io', 10);
+
         // this.title = 'angular2';
         // this.link = 'http://angular.io';
         // this.votes = 10;
     }
 
     voteUp() {
-        this.article.votes += 1;
+        this.article.voteUp();
         return false;
-    }ı
+    }
     voteDown() {
-        this.article.votes -= 1;
+        this.article.voteDown();
         return false;
     }
 }

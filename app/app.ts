@@ -5,6 +5,7 @@
 import { bootstrap } from "angular2/platform/browser";
 import { Component } from "angular2/core";
 import { ArticleComponent } from "./app-02";
+import { Article } from './model/article';
 
 @Component({
     selector: 'reddit',
@@ -30,8 +31,9 @@ import { ArticleComponent } from "./app-02";
         
         
         <div class="ui grid posts">
-            <reddit-article>
-            
+            <reddit-article *ngFor="#article of articles"
+                [article]="article"
+                >
             </reddit-article>
         </div>
         
@@ -39,7 +41,13 @@ import { ArticleComponent } from "./app-02";
 })
 
 class RedditApp {
+    articles: Article[];
     constructor() {
+        this.articles = [
+            new Article('Angular 2', 'http://angular.io', 3),
+            new Article('Fullstack', 'http://fullstack.io', 2),
+            new Article('Angular Homepage', 'http://angular.io', 1)
+        ]
     }
     addArticle(title: HTMLInputElement, link: HTMLInputElement): void {
         console.log(`title :${title.value} and link : ${link.value}`)

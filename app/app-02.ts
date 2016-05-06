@@ -9,6 +9,7 @@ import { Article } from './model/article';
 
 @Component({
     selector: 'reddit-article',
+    inputs:['article'],
     host: {
         class: 'row'
     },
@@ -61,15 +62,13 @@ export class ArticleComponent {
 
     article: Article;
 
-    constructor() {
+    // constructor() {
+    //     this.article = new Article('Angular 2', 'http://angular.io', 10);
 
-
-        this.article = new Article('Angular 2', 'http://angular.io', 10);
-
-        // this.title = 'angular2';
-        // this.link = 'http://angular.io';
-        // this.votes = 10;
-    }
+    //     // this.title = 'angular2';
+    //     // this.link = 'http://angular.io';
+    //     // this.votes = 10;
+    // }
 
     voteUp() {
         this.article.voteUp();

@@ -3,7 +3,8 @@
 
 
 import { bootstrap } from "angular2/platform/browser";
-import { Component } from "angular2/core";
+import { Component, EventEmitter } from "angular2/core";
+
 
 //========================RedditApp=========================================
 
@@ -70,14 +71,182 @@ import { Component } from "angular2/core";
 
 //=========================How to work========================================
 
-import {Product} from './model/product';
+
+/**
+ * Product
+ */
+export class Product {
+    constructor(
+        public sku: string,
+        public name: string,
+        public imageUrl:string,
+        public department: string[],
+        public price: number
+    ) {
+
+    }
+}
+
+
+
+
+@Component({
+    selector: 'product-department',
+    inputs: ['product'],
+    template: `
+        <div class="product-department">
+            <span *ngFor="#name of product.department; #i=index">
+                <a href="#">{{name}}</a>
+                <span>{{i<(product.department.length-1)?'>':''}}</span>
+            </span>
+            
+        
+        </div>
+    
+    `
+})
+
+/**
+ * ProductDepartment
+ */
+class ProductDepartment {
+    product: Product;
+    constructor() {
+
+    }
+}
+
+
+
+@Component({
+    selector: 'price-display',
+    inputs: ['price'],
+    template: `
+        <div class="price-display">$ {{price}}</div>
+        `
+})
+/**
+ * ProductImage
+ */
+class PriceDisplay {
+    price: number;
+    constructor() {
+    }
+}
+
+
+
+
+
+/**
+ * [src] 的技巧
+ * 当angular run 的时候第一次会去计算表达式的值，所以不能使用 src="{{product.imageUrl}}"
+ * 所以会报错，使用 【src】属性，则告诉angular src是一个输入型的参数
+ */
+@Component({
+    selector: 'product-image',
+    inputs:['product'],
+    host: {
+        class: 'ui small image'
+    },
+    template: `
+        <img class="product-image" [src]="product.imageUrl">
+        `
+})
+/**
+ * ProductImage
+ */
+class ProductImage {
+    product: Product;
+}
+
+
+
+
+
+@Component({
+    selector: 'product-row',
+    inputs: ['product'],
+    host: {
+        'class': 'item'
+    },
+    directives: [ProductImage, ProductDepartment, PriceDisplay],
+    template: `
+       <product-image [product]="product">
+       
+       </product-image> 
+       <div class="content">
+            <div class="header">{{ product.name }}</div> 
+            <div class="meta">
+                 <div class="product-sku">SKU #{{ product.sku }}</div>
+             </div>
+            <div class="description">
+            <product-department [product]="product"></product-department>
+             </div>
+            </div>
+            <price-display [price]="product.price">
+        </price-display>
+    `
+})
+
+
+class ProductRow {
+    produt: Product
+}
+
+
+
+@Component({
+    selector: 'products-list',
+    directives: [ProductRow],
+    inputs: ['productList'],
+    outputs: ['onProductSelected'],
+    template: `
+        <div class="ui items">
+            <product-row 
+                *ngFor="#myProduct of productList"
+                [product]="myProduct"
+                (click)="clicked(myProduct)"
+                [class.selected]="isSelected(myProduct)"
+            >
+            </product-row>
+        </div>
+    
+    `
+})
+class ProductList {
+    productList: Product[];
+
+    currentProduct: Product;
+    onProductSelected: EventEmitter<Product>;
+    constructor() {
+        this.onProductSelected = new EventEmitter();
+    }
+    clicked(product: Product): void {
+        this.currentProduct = product;
+        this.onProductSelected.emit(product);
+    }
+
+    isSelected(product: Product): boolean {
+        if (!product || !this.currentProduct) {
+            return false;
+        }
+        return product.sku === this.currentProduct.sku;
+    }
+
+}
 
 @Component({
     selector: 'inventory-app',
+    directives: [ProductList],
     template: `
         <div class="inventory-app">
-            <h1>{{product.name}}</h1>
-            <span>{{product.name}}</span>
+            <products-list    
+                [productList]="products"
+                (onProductSelected)="productWasSelected($event)"
+                >
+             
+            </products-list>
         </div>
     
     `
@@ -118,6 +287,20 @@ class InventoryApp {
         console.log('product clicked:', product)
     }
 }
+
+bootstrap(InventoryApp);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

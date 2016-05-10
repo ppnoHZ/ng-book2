@@ -100,5 +100,35 @@
     ```
  
  
- 
- *
+# 内置组件
+
+* NgIf
+
+```html
+  <div *ngIf="false"></div>
+  <div *ngIf="a > b"></div>
+  <div *ngIf="str=='yes'"></div>
+  <div *ngIf="myFunc()"></div>
+```
+
+* NgSwitch
+
+```html
+  <div [ngSwitch]="myVar"></div>
+  <div *ngSwitchWhen="A">var is A</div>
+  <div *ngSwitchWhen="A">var is B</div>
+  <div *ngSwitchWhen="A">var is C</div>
+  <div *ngSwitchDefault>var is something else</div>
+```
+
+* NgStyle
+
+```html
+   <div [style.background-color]="yellow">
+     Uses fixed yellow background
+   </div>
+   
+   <div [ngStyle]="{color:'white','background-color':'blue'}">
+     Uses fixed white text on blue background
+   </div>
+```

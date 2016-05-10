@@ -79,7 +79,7 @@ export class Product {
     constructor(
         public sku: string,
         public name: string,
-        public imageUrl:string,
+        public imageUrl: string,
         public department: string[],
         public price: number
     ) {
@@ -145,7 +145,7 @@ class PriceDisplay {
  */
 @Component({
     selector: 'product-image',
-    inputs:['product'],
+    inputs: ['product'],
     host: {
         class: 'ui small image'
     },
@@ -196,6 +196,11 @@ class ProductRow {
 
 
 
+/**
+ * [class.selected]="{{express}}"
+ * 如果表达式返回为true 在当前element会附加一个selected的样式。
+ */
+
 @Component({
     selector: 'products-list',
     directives: [ProductRow],
@@ -233,7 +238,6 @@ class ProductList {
         }
         return product.sku === this.currentProduct.sku;
     }
-
 }
 
 @Component({
@@ -260,20 +264,15 @@ class InventoryApp {
     constructor() {
         this.products = [
             new Product(
-                'NICEHAT', 'A Nice Black Hat',
-                '/resources/images/products/black-hat.jpg',
-                ['Men', 'Accessories', 'Hats'],
-                29.99),
+                'MYSHOES', 'Black Running Shoes',
+                '/resources/images/products/black-shoes.jpg',
+                ['Men', 'Shoes', 'Running Shoes'],
+                109.99),
             new Product(
-                'NICEHAT', 'A Nice Black Hat',
-                '/resources/images/products/black-hat.jpg',
-                ['Men', 'Accessories', 'Hats'],
-                29.99),
-            new Product(
-                'NICEHAT', 'A Nice Black Hat',
-                '/resources/images/products/black-hat.jpg',
-                ['Men', 'Accessories', 'Hats'],
-                29.99),
+                'NEATOJACKET', 'Blue Jacket',
+                '/resources/images/products/blue-jacket.jpg',
+                ['Women', 'Apparel', 'Jackets & Vests'],
+                238.99),
             new Product(
                 'NICEHAT', 'A Nice Black Hat',
                 '/resources/images/products/black-hat.jpg',

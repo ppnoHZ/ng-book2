@@ -1,3 +1,5 @@
+# 使用
+执行：npm run serve
 # VS Code 使用
 将项目录变成typescript项目,使用CTRL+SHIFT+B进行编译,如果存在.vscode文件夹则表示已经配置过了，如果没有点击配置任务运行程序，选择typescript tsconfig.
 # tsconfig.json 

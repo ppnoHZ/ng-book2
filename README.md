@@ -101,4 +101,34 @@
  
  
  
- *
+## 组件定义属性说明
+
+* selector 组件的名称
+* directives 需要引用的其他组件
+* inputs 定义其他组件在调用该组件的时候定义的变量
+* outputs 定义当前组件对外输出（事件）
+* host 指定当前组件标签属性，可以通过class 给当前组件指定样式
+  ```javascript
+
+    @Component({
+        selector: 'products-list',
+        directives: [ProductRow],
+        inputs: ['productList'],
+        outputs: ['onProductSelected'],
+        host: {
+          class: 'item'
+        },
+        template: `
+            <div class="ui items">
+                <product-row 
+                    *ngFor="#myProduct of productList"
+                    [product]="myProduct"
+                    (click)="clicked(myProduct)"
+                    [class.selected]="isSelected(myProduct)"
+                >
+                </product-row>
+            </div>
+        
+        `
+    })
+  ```
